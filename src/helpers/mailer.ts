@@ -30,7 +30,8 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
             html: `<p>Click <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">Here</a> to ${emailType === 'VERIFY' ? 'verify your email' : 'reset your password'} < /p>`
         }
 
-        //TODO: sendMail
+        const mailResponse = await transport.sendMail(mailOptions);
+        return mailResponse;
 
     } catch (error: any) {
         throw new Error(error.message);
